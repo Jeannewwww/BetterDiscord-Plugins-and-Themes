@@ -7,6 +7,37 @@ Provides a better API mantained by me.
 
 **This plugin is a requirement for most of my other plugins to work!**
 
+Currently available BdApi functions:
+```js
+BdApi.joinServer("code");
+BdApi.injectCSS("id", "css");
+BdApi.clearCSS("id");
+BdApi.getPlugin("name");
+BdApi.getIpc();
+BdApi.getCore();
+BdApi.getUserIdByName("name");
+BdApi.getUserNameById("id");
+```
+
+Currently available BetterAPI functions:
+```js
+BetterAPI.log(dbg, "type", "pluginName", "msg");
+BetterAPI.appendTo("link", "Element");
+BetterAPI.EnableTextSelection();
+BetterAPI.getUserIdByName("name");
+BetterAPI.getUserNameById(id);
+BetterAPI.getUserAvatarID(id);
+BetterAPI.getUserAvatarURL(id);
+BetterAPI.getCurrentChannelName();
+BetterAPI.getCurrentChannelID();
+BetterAPI.getCurrentServerName();
+BetterAPI.getCurrentServerID();
+BetterAPI.addUserLabel("divID", "label", "<html>");
+BetterAPI.addUserLink(divID, id1, href1, text1, [id2, href2, text2]);
+BetterAPI.addUserButton("btn", "divID", "text");
+BetterAPI.changeUserInfo("email", "password", "nickname", ["avatar" BetterAPI.getUserAvatarID(id)]);
+```
+
 ##User Info Plugin ([1_userinfo.js](https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/plugins/1_userinfo.js))
 Gives you the ability to see more info about a user.
 

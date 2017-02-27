@@ -1,47 +1,66 @@
 //META{"name":"userInfo"}*// Needs https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/plugins/0_BetterAPI.js to work properly!
 function userInfo() {}
 userInfo.prototype.load = function() {
-	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " loaded.");
 };
 userInfo.prototype.unload = function() {
-	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " unloaded.");
 };
 userInfo.prototype.start = function() {
     $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
-        if ($('#UserInfo').length <= 0) {
-			// var usernamebyid = BetterAPI.getUserNameById(id);
-            $('.user-popout-options').append('<button class="btn" id="UserInfo">Info</button>');
-            $('#UserInfo').on("click", function () {
-				var username = $(".user-popout").find(".username").text();
-				var id = BetterAPI.getUserIdByName(username);
-				var name = BetterAPI.getUserNameById(id);
-				// infoAlert(username +'\'s Info','Name: '+username+'\n'+'UID: '+id);
-				$.jAlert({
-					'title': username +'\'s Info',
-					'content': 'Name: '+username+'<br>UID: '+id,
-					'theme': 'blue',
-					'class': 'btn',
-					// 'closeOnClick': true,
-					// 'onOpen': function(alert){ return false; }	
-					'btns': [ {
-						'text': 'copy'
-					}, {
-						'text': 'close'
-					} ]
-				});
-				console.clear();
-				BetterAPI.log(0, "info", userInfo.prototype.getName()+": "+username+'\'s Info', "\n\nName: \""+username+"\"\nUID: \""+id+"\"");
-            });
-        }
-    });
-	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " started.");
+		var name = $(".user-popout").find(".username").text();
+		id = BetterAPI.getUserIdByName(name);
+		avatarID = BetterAPI.getUserAvatarID(id);
+		avatarURL = BetterAPI.getUserAvatarURL(id);
+		nameByID = BdApi.getUserNameById(id);
+		gameByID = BetterAPI.getUserGameByID(id);
+		if (gameByID == null) {	
+			BetterAPI.addUserLabel("UserInfoLabel", "Info", ''+
+			'<img src="'+avatarURL+'" style="max-width:223px;"></img><br>'+
+			'<b>Name: </b>'+name+'<br>'+
+			'<b>UID: </b><span style="color:darkgrey">'+id+'</span><br>'+
+			'<b>AID: </b><span style="font-size:x-small">'+avatarID+'</span>');
+		} else {
+			BetterAPI.addUserLabel("UserInfoLabel", "Info", ''+
+			'<img src="'+avatarURL+'" style="max-width:223px;"></img><br>'+
+			'<b>Name: </b>'+name+'<br>'+
+			'<b>UID: </b><span style="color:darkgrey">'+id+'</span><br>'+
+			'<b>AID: </b><span style="font-size:x-small">'+avatarID+'</span><br>'+
+			'<b>Game: </b><span style="color:blue">'+gameByID+'</span>');
+		}
+		// BetterAPI.addUserButton("btn", "#UserInfo", "Info");
+		// $('#UserInfo').on("click", function () {
+			// $.jAlert({
+				// 'title': name +'\'s Info',
+				// 'content': '<table style="width:100%">'+
+					// '<tr>'+
+						// '<td><b>Name: </b></td>'+
+						// '<td>'+name+'</td>'+
+					// '</tr>'+
+					// '<tr>'+
+						// '<td><b>UID: </b></td>'+
+						// '<td>'+id+'</td>'+
+					// '</tr>'+
+					// '<tr>'+
+						// '<td><b>Name by ID: </b></td>'+
+						// '<td>'+nameByID+'</td>'+
+					// '</tr>'+
+				// '</table>',
+				// 'theme': 'blue',
+				// 'btns': [ {
+					// 'text': 'Copy',
+					// 'class': 'btn_copy',
+					// 'onClick': function(e, btn) { new Clipboard('ja_body'); BetterAPI.log(1, "log", userInfo.prototype.getName()+": ",'Copied \"'+$('.ja_body').html()+'\" to clipboard.'); },
+				// }, {
+					// 'text': 'Close'
+				// } ]
+			// });
+			// BetterAPI.log(0, "info", userInfo.prototype.getName()+": "+name+'\'s Info', "\n\nName: \""+name+"\"\nUID: \""+id+"\"");
+		// });
+	});
 };
 userInfo.prototype.stop = function() {
 	$('span[data-reactid=".0.4"').off('DOMNodeInserted.userInfo');
-	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " stopped.");
 };
 userInfo.prototype.update = function() {
-	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " updated.");
 };
 userInfo.prototype.getName = function() {
 	return "User Info Plugin";
